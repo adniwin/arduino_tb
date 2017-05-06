@@ -21,7 +21,7 @@
             <div class="block-header">
                 <h2>DASHBOARD</h2>
             </div>
-            <!-- Widgets -->
+            <!-- Widgets -->            
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="info-box bg-red hover-expand-effect">
@@ -30,6 +30,7 @@
                         </div>
                         <div class="content">
                             <div class="text">Newest Temperature</div>
+
                             <div class="number count-to" data-from="0" data-to="<?=$last_value->suhu?>" data-speed="1000" data-fresh-interval="20"><?=$last_value->suhu?></div>
                         </div>
                     </div>

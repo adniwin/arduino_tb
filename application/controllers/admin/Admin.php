@@ -44,52 +44,6 @@ class admin extends CI_Controller
         return $total;
     }
 
-    private function get_last_value()
-    {
-        $dest_table_as = 'arduino as a';
-        $select_values = array('*');
-        $params = new stdClass();
-        $params->dest_table_as = $dest_table_as;
-        $params->select_values = $select_values;
-        $order_by = array("order_column" => "a.id", "order_type" => "DESC");
-        $params->order_by = array($order_by);
-        $params->limit = '1';
-        $get = $this->data_model->get($params);
-        if ($get['response'] == OK_STATUS) {
-            if (!empty($get['results'])) {
-                $total = $get["results"][0];
-            } else {
-                $total = [];
-            }
-        } else {
-            $total = [];
-        }
-        return $total;
-    }
-
-    private function get_last_predict()
-    {
-        $dest_table_as = 'prediction_history as a';
-        $select_values = array('*');
-        $params = new stdClass();
-        $params->dest_table_as = $dest_table_as;
-        $params->select_values = $select_values;
-        $order_by = array("order_column" => "a.id", "order_type" => "DESC");
-        $params->order_by = array($order_by);
-        $params->limit = '1';
-        $get = $this->data_model->get($params);
-        if ($get['response'] == OK_STATUS) {
-            if (!empty($get['results'])) {
-                $total = $get["results"][0];
-            } else {
-                $total = [];
-            }
-        } else {
-            $total = [];
-        }
-        return $total;
-    }
-
     public function checkauth()
     {
         if ($this->session->userdata('web_token') == "") {
@@ -113,7 +67,8 @@ class admin extends CI_Controller
     {
         $this->data['active_page'] = "dashboard";
         $this->data['title_page'] = "Dashboard";
-        $this->data['last_value'] = $this->get_last_value();
+        $order_by = array("order_column" => "id", "order_type" => "DESC");
+        $this->data['last_value']= $this->get_values('arduino', $order_by, '1');
         $this->load->view('admin/index', $this->data);
     }
 
@@ -122,12 +77,9 @@ class admin extends CI_Controller
         $uri = $this->uri->segment(3);
         $params = new stdClass();
         $params->dest_table_as = 'arduino as s';
-        $params->select_values = array('s.*');
-        $params->limit = '15';
-        $order_by = array("order_column" => "s.id", "order_type" => "DESC");
-        $params->order_by = array($order_by);
-        $get = $this->data_model->get($params);
-        foreach ($get["results"] as $row) {
+        $order_by = array("order_column" => "id", "order_type" => "DESC");
+        $get = $this->get_values('arduino', $order_by, '15');
+        foreach ($get as $row) {
             $suhu[] = array($row->waktu, $row->suhu);
             $lembap[] = array($row->waktu, $row->kelembapan);
             $cahaya[] = array($row->waktu, $row->cahaya);
@@ -136,18 +88,13 @@ class admin extends CI_Controller
         echo json_encode($data, JSON_NUMERIC_CHECK);
     }
 
-    public function data_table()
-    {
-        $this->datatables->select('*');
-        $this->datatables->from('arduino');
-        return print_r($this->datatables->generate());
-    }
 
     public function data()
     {
         $this->data['active_page'] = "data";
         $this->data['title_page'] = "Data";
-        $this->data['last_predict'] = $this->get_last_predict();
+        $order_by = array("order_column" => "id", "order_type" => "DESC");
+        $this->data['last_predict'] = $this->get_values('prediction_history', $order_by, '1');
         $this->load->view('admin/graphic', $this->data);
     }
 
@@ -173,13 +120,8 @@ class admin extends CI_Controller
         $params = new stdClass();
         $this->data['active_page'] = "history";
         $this->data['title_page'] = "History";
-        $params->dest_table_as = 'arduino as s';
-        $params->select_values = array('s.*');
-        $order_by = array("order_column" => "s.id", "order_type" => "DESC");
-        $params->order_by = array($order_by);
-        $params->limit = '30';
-        $get = $this->data_model->get($params);
-        $res = $get['results'];
+        $order_by = array("order_column" => "id", "order_type" => "DESC");
+        $res = $this->get_values('arduino', $order_by, '30');
         $suhu = [];
         $lembab = [];
         $cahaya = [];
