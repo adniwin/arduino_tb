@@ -19,15 +19,15 @@
                 </a>
                 </li>
                 <?php
-                if ($active_page == 'graphic') {
+                if ($active_page == 'data') {
                     echo '<li class="active">';
                 } else {
                     echo '<li>';
                 }
                 ?>                
-                <a href="<?= ADMIN_WEBAPP_URL ?>graphic" class="waves-effect waves-block">
+                <a href="<?= ADMIN_WEBAPP_URL ?>data" class="waves-effect waves-block">
                     <i class="mdi mdi-chart-line mdi-24px"></i>
-                    <span>Graphic</span>
+                    <span>Data</span>
                 </a>                
                 </li>
                 <?php

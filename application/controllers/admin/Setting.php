@@ -2,16 +2,18 @@
 
 include 'Admin.php';
 
-class setting extends admin {
-
-    function __construct() {
+class setting extends admin
+{
+    public function __construct()
+    {
         parent::__construct();
         parent::checkauth();
         $this->data['active_page'] = "setting";
     }
 
     //Data on Page
-    public function website() {
+    public function website()
+    {
         $this->data['title_page'] = "Website";
         $dest_table_as = 'setting_website as sw';
         $select_values = array('sw.*');
@@ -27,7 +29,8 @@ class setting extends admin {
         $this->load->view('admin/setting/website', $this->data);
     }
 
-    public function account() {
+    public function account()
+    {
         $this->data['title_page'] = "Login Account";
         $dest_table_as = 'user as u';
         $select_values = array('u.*');
@@ -43,7 +46,8 @@ class setting extends admin {
         $this->load->view('admin/setting/account', $this->data);
     }
 
-    public function update_website() {
+    public function update_website()
+    {
         $id = $this->input->post("id");
         $name = $this->input->post("name");
         $description = $this->input->post("description");
@@ -101,7 +105,8 @@ class setting extends admin {
         echo json_encode($result);
     }
 
-    public function update_account_password() {
+    public function update_account_password()
+    {
         $input = json_decode(file_get_contents('php://input'));
         $last_password = $input->last_password;
         $new_password = $input->new_password;
@@ -131,7 +136,8 @@ class setting extends admin {
         echo json_encode($response_data);
     }
 
-    public function update_account_email() {
+    public function update_account_email()
+    {
         $input = json_decode(file_get_contents('php://input'));
         $email = $input->email;
         $params_data = new stdClass();
@@ -147,5 +153,4 @@ class setting extends admin {
         }
         echo json_encode($response_data);
     }
-
 }

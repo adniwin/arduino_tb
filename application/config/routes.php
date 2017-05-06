@@ -66,8 +66,9 @@ $route['admin'] = 'admin/admin/dashboard';
 $route['admin/404'] = 'admin/admin/notfound';
 $route['admin/data_graphic'] = 'admin/admin/data_graphic';
 $route['admin/data_table'] = 'admin/admin/data_table';
-$route['admin/graphic'] = 'admin/admin/graphic';
+$route['admin/data'] = 'admin/admin/data';
 $route['admin/history'] = 'admin/admin/history';
+$route['admin/predict'] = 'admin/admin/predict';
 
 //setting
 $route['admin/setting/website'] = 'admin/setting/website';
