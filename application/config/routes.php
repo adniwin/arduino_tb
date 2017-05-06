@@ -1,6 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
   | -------------------------------------------------------------------------
@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //front
 $route['default_controller'] = 'welcome/index';
 //$route['404_override'] = 'welcome/not_found';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = false;
 //AUTH
 $route['checkwebtoken'] = 'authentication/authentication/checkwebtoken';
 $route['submit_login'] = 'authentication/authentication/submit_login';
@@ -77,10 +77,10 @@ $route['admin/setting/update_website'] = 'admin/setting/update_website';
 $route['admin/setting/update_account_password'] = 'admin/setting/update_account_password';
 $route['admin/setting/update_account'] = 'admin/setting/update_account';
 
+//device
+$route['device/add'] = 'device/device/add';
+
 
 
 //front
 $route['notfound'] = 'front/front/notfound';
-
-
-

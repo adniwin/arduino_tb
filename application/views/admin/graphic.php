@@ -31,7 +31,14 @@
                                 <button class="btn btn-info btn-lg" onclick="predictModal()">Click here to predict </button>
                             </div>
                             <div class="col-md-6 text-right font-18">
-                                <font id="predict_result" class="font-bold"></font>
+                              <?php
+                                if ($last_predict) {
+                                    $predict = $last_predict->prediction.'('.$last_predict->time.')';
+                                } else {
+                                    $predict = "No prediction before";
+                                }
+                              ?>
+                                <font id="predict_result" class="font-bold"><?=  $predict;?></font>
                             </div>
                         </div>
                     </div>

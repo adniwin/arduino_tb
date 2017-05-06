@@ -1,4 +1,4 @@
-<body class="theme-green">
+<body class="theme-indigo">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -43,9 +43,9 @@
                     <li >
                         <a href="javascript:void(0);" title="Keluar" onclick="logoutModal()">
                             <i class="mdi mdi-logout-variant mdi-24px"></i>
-                            <!--                            <i class="material-icons">notifications</i>-->                            
-                        </a>                        
-                    </li>                    
+                            <!--                            <i class="material-icons">notifications</i>-->
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

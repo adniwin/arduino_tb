@@ -120,7 +120,7 @@ class setting extends admin
         $get = $this->data_model->get($params);
         if ($get['response'] == OK_STATUS) {
             if ($last_password != $get['results'][0]->password) {
-                $response_data = array("response" => FAIL_STATUS, "message" => "Password lama tidak sesuai");
+                $response_data = array("response" => FAIL_STATUS, "message" => "Old password not valid");
             } else {
                 $params_data = new stdClass();
                 $params_data->new_data = array("password" => $new_password);
@@ -129,7 +129,7 @@ class setting extends admin
                 $params_data->table_update = 'user';
                 $update = $this->data_model->update($params_data);
                 if ($update["response"] == OK_STATUS) {
-                    $response_data = array("response" => OK_STATUS, "message" => "Password sudah diganti");
+                    $response_data = array("response" => OK_STATUS, "message" => "Password Changed");
                 }
             }
         }

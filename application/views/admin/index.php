@@ -5,8 +5,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title><?= $title_page ?></title>    
-        <?php $this->load->view('admin/static/files'); ?>    
+        <title><?= $title_page ?></title>
+        <?php $this->load->view('admin/static/files'); ?>
         <script src="<?= BACKEND_STATIC_FILES ?>plugins/jquery-countto/jquery.countTo.js"></script>
     </head>
 
@@ -20,8 +20,8 @@
         <div class="container-fluid">
             <div class="block-header">
                 <h2>DASHBOARD</h2>
-            </div>            
-            <!-- Widgets -->            
+            </div>
+            <!-- Widgets -->
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="info-box bg-red hover-expand-effect">
@@ -55,7 +55,7 @@
                             <div class="number count-to" data-from="0" data-to="<?=$last_value->cahaya?>" data-speed="1000" data-fresh-interval="20"><?=$last_value->cahaya?></div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
             <!-- #END# Widgets -->
             <!-- CPU Usage -->

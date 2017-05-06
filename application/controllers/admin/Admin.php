@@ -12,6 +12,38 @@ class admin extends CI_Controller
         $this->checkauth();
     }
 
+    private function get_values($table_name, $order_by, $limit = null)
+    {
+        $dest_table_as = $table_name;
+        $select_values = array('*');
+        $params = new stdClass();
+        $params->dest_table_as = $dest_table_as;
+        $params->select_values = $select_values;
+        $params->order_by = array($order_by);
+        if (isset($limit)) {
+            $params->limit = $limit;
+        }
+        $get = $this->data_model->get($params);
+        if ($get['response'] == OK_STATUS) {
+            if (!empty($get['results'])) {
+                if (isset($limit)) {
+                    if ($limit == '1') {
+                        $total = $get["results"][0];
+                    } else {
+                        $total = $get["results"];
+                    }
+                } else {
+                    $total = $get["results"];
+                }
+            } else {
+                $total = [];
+            }
+        } else {
+            $total = [];
+        }
+        return $total;
+    }
+
     private function get_last_value()
     {
         $dest_table_as = 'arduino as a';
@@ -19,6 +51,31 @@ class admin extends CI_Controller
         $params = new stdClass();
         $params->dest_table_as = $dest_table_as;
         $params->select_values = $select_values;
+        $order_by = array("order_column" => "a.id", "order_type" => "DESC");
+        $params->order_by = array($order_by);
+        $params->limit = '1';
+        $get = $this->data_model->get($params);
+        if ($get['response'] == OK_STATUS) {
+            if (!empty($get['results'])) {
+                $total = $get["results"][0];
+            } else {
+                $total = [];
+            }
+        } else {
+            $total = [];
+        }
+        return $total;
+    }
+
+    private function get_last_predict()
+    {
+        $dest_table_as = 'prediction_history as a';
+        $select_values = array('*');
+        $params = new stdClass();
+        $params->dest_table_as = $dest_table_as;
+        $params->select_values = $select_values;
+        $order_by = array("order_column" => "a.id", "order_type" => "DESC");
+        $params->order_by = array($order_by);
         $params->limit = '1';
         $get = $this->data_model->get($params);
         if ($get['response'] == OK_STATUS) {
@@ -57,14 +114,6 @@ class admin extends CI_Controller
         $this->data['active_page'] = "dashboard";
         $this->data['title_page'] = "Dashboard";
         $this->data['last_value'] = $this->get_last_value();
-        //        $this->data['total_data'] = array(
-        //            "kategori_properti" => $this->get_table_count('kategori_properti'),
-        //            "properti" => $this->get_table_count('properti'),
-        //            "artikel" => $this->get_table_count('artikel'),
-        //            "iklan" => $this->get_table_count('iklan'),
-        //            "developer" => $this->get_table_count('developer'),
-        //            "portfolio" => $this->get_table_count('portfolio'),
-        //        );
         $this->load->view('admin/index', $this->data);
     }
 
@@ -98,21 +147,17 @@ class admin extends CI_Controller
     {
         $this->data['active_page'] = "data";
         $this->data['title_page'] = "Data";
+        $this->data['last_predict'] = $this->get_last_predict();
         $this->load->view('admin/graphic', $this->data);
     }
 
     public function history()
     {
-        $params = new stdClass();
         $this->data['active_page'] = "history";
         $this->data['title_page'] = "History";
-        $params->dest_table_as = 'arduino as s';
-        $params->select_values = array('s.*');
-        $order_by = array("order_column" => "s.id", "order_type" => "DESC");
-        $params->order_by = array($order_by);
-        $get = $this->data_model->get($params);
-        $this->data['record'] = $get['results'];
-        //        print_r($this->data['record']);exit();
+        $order_by = array("order_column" => "id", "order_type" => "DESC");
+        $this->data['sensor_values']= $this->get_values('arduino', $order_by);
+        $this->data['prediction_values'] = $this->get_values('prediction_history', $order_by);
         $this->load->view('admin/history', $this->data);
     }
 

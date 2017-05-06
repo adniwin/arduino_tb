@@ -66,7 +66,7 @@
                     content: "{name}: {y}"
                 },
                 axisX: {
-                    labelFontSize: 13,
+                    labelFontSize: 8,
                 },
                 data: [
                     {
@@ -125,7 +125,7 @@
                 $('#predict_result').html('<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only"></span>');
                 setTimeout(function ()
                 {
-                    var res = JSON.parse(response);                    
+                    var res = JSON.parse(response);
                     $('#predict_result').html(res.prediction + ' (' + res.time + ')');
                 }, 2000);
 
@@ -136,4 +136,3 @@
 
 
 </script>
-
