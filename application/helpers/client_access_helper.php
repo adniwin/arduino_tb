@@ -5,17 +5,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
 
-function access() {
+function access()
+{
     $ci = & get_instance();
     $from = $ci->input->get_request_header('access_from');
     return $from;
 }
 
-function empty_check($fill, $title) {
+function empty_check($fill, $title)
+{
     $ci = & get_instance();
     $ci->load->helper('rest_response_helper');
     $params = new stdClass();
