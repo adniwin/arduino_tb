@@ -171,15 +171,15 @@ class admin extends CI_Controller
                 break;
         }
         switch ($rata_cahaya) {
-            case ($rata_cahaya <= 1015):
+            case ($rata_cahaya <= 50):
 //                $status_cahaya = "mendung";
                 $status_cahaya = "Overcast";
                 break;
-            case ($rata_cahaya > 1015 and $rata_cahaya <= 1017):
+            case ($rata_cahaya > 50 and $rata_cahaya <= 95):
 //                $status_cahaya = "berawan";
                 $status_cahaya = "Cloudy";
                 break;
-            case ($rata_cahaya > 1017):
+            case ($rata_cahaya > 95):
 //                $status_cahaya = "terang";
                 $status_cahaya = "Sunny";
                 break;
@@ -191,46 +191,45 @@ class admin extends CI_Controller
 
         /////////////////////////////////// tahap 1
         //tahap 1,1,1
-        if ($rata_suhu <= 22 and $rata_lembab <= 20 and $rata_cahaya <= 1015) {
+        if ($rata_suhu <= 22 and $rata_lembab <= 20 and $rata_cahaya <= 50) {
             //            $status = "mendung kemungkinan hujan";
             $status = "Overcast going to rain";
         }
         //tahap 1,1,2
-        elseif ($rata_suhu <= 22 and $rata_lembab <= 20 and ($rata_cahaya > 1015 and $rata_cahaya <= 1017)) {
-            //            $status = "cerah";
-            $status = "Sunny";
+        elseif ($rata_suhu <= 22 and $rata_lembab <= 20 and ($rata_cahaya > 50 and $rata_cahaya <= 95)) {
+            //            $status = "berawan";
+            $status = "cloudy";
         }
         //tahap 1,1,3
-        elseif ($rata_suhu <= 22 and $rata_lembab <= 20 and $rata_cahaya > 1017) {
+        elseif ($rata_suhu <= 22 and $rata_lembab <= 20 and $rata_cahaya > 95) {
             $status = "Sunny";
         }
         //tahap 1,2,1
-        elseif ($rata_suhu <= 22 and ($rata_lembab > 20 and $rata_lembab <= 70) and $rata_cahaya <= 1015) {
+        elseif ($rata_suhu <= 22 and ($rata_lembab > 20 and $rata_lembab <= 70) and $rata_cahaya <= 50) {
             //            $status = "hujan";
             $status = "Rainy";
         }
         //tahap 1,2,2
-        elseif ($rata_suhu <= 22 and ($rata_lembab > 20 and $rata_lembab <= 70) and ($rata_cahaya > 1015 and $rata_cahaya <= 1017)) {
-            //            $status = "hujan";
-            $status = "Rainy";
+        elseif ($rata_suhu <= 22 and ($rata_lembab > 20 and $rata_lembab <= 70) and ($rata_cahaya > 50 and $rata_cahaya <= 95)) {
+            $status = "cloudy";
         }
         //tahap 1,2,3
-        elseif ($rata_suhu <= 22 and ($rata_lembab > 20 and $rata_lembab <= 70) and $rata_cahaya > 1017) {
+        elseif ($rata_suhu <= 22 and ($rata_lembab > 20 and $rata_lembab <= 70) and $rata_cahaya > 95) {
             //            $status = "cerah";
             $status = "Sunny";
         }
         //tahap 1,3,1
-        elseif ($rata_suhu <= 22 and $rata_lembab > 70 and $rata_cahaya <= 1015) {
+        elseif ($rata_suhu <= 22 and $rata_lembab > 70 and $rata_cahaya <= 22) {
             //            $status = "hujan";
             $status = "Rainy";
         }
         //tahap 1,3,2
-        elseif ($rata_suhu <= 22 and $rata_lembab > 70 and ($rata_cahaya > 1015 and $rata_cahaya <= 1017)) {
+        elseif ($rata_suhu <= 22 and $rata_lembab > 70 and ($rata_cahaya > 50 and $rata_cahaya <= 95)) {
             //            $status = "hujan";
-            $status = "Rainy";
+            $status = "Cloudy";
         }
         //tahap 1,3,3
-        elseif ($rata_suhu <= 22 and $rata_lembab > 70 and $rata_cahaya > 1017) {
+        elseif ($rata_suhu <= 22 and $rata_lembab > 70 and $rata_cahaya > 95) {
             //            $status = "cerah";
             $status = "Sunny";
         }
